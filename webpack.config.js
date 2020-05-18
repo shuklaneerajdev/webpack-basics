@@ -47,14 +47,32 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.html$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]'
+                        }
+                    }
+                ],
+                exclude: path.resolve(__dirname, 'src/index.html')
             }
         ]
     },
     plugins: [
         extractPlugin,
         new HtmlWebpackPlugin({
+            filename: 'index.html',
             template: 'src/index.html'
         }),
+        // new HtmlWebpackPlugin({
+        //     template: 'src/about.html',
+        //     filename: 'about.html',
+        //     chunks: []
+        // }),
         new CleanWebpackPlugin(),
     ]
 }
